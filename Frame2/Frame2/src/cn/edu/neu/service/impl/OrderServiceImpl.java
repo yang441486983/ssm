@@ -75,6 +75,18 @@ public class OrderServiceImpl implements OrderService {
 		return page;
 	}
 
+	@Override
+	public List<Order> getMyListOrders(int loginUserId, String status) {
+		Page<Order>page = new Page<Order>(100);
+		Map<String,Object> m = new HashMap<String,Object>();
+		m.put("userId", loginUserId+"");
+		m.put("status", status);
+		page.setParams(m);
+		
+		List<Order> orders = orderMapper.findMyListOrders(page);
+		return orders;
+	}
+
 
 	@Override
 	public void delOrder(String orderId) {
@@ -102,5 +114,10 @@ public class OrderServiceImpl implements OrderService {
 		orderMapper.changeOrderStatus(orderId,status);
 		
 	}
+
+
+
+
+	
 	
 }

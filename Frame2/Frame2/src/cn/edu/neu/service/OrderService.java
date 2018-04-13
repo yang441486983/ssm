@@ -19,4 +19,8 @@ public interface OrderService {
 
 	void changeOrderStatus(String orderId, int status);
 
+	List<Order> getMyListOrders(int loginUserId, String status);
+
+
+
 }

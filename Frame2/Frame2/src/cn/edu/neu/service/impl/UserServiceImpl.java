@@ -101,4 +101,13 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return mapper.checkAdmin(user);
 	}
+
+	@Override
+	public User findMyInfo(String userName) {
+		// TODO Auto-generated method stub
+		User findMyInfo = mapper.findMyInfo(userName);
+		return findMyInfo;
+	}
+
+	
 }

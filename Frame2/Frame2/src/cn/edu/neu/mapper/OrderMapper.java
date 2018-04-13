@@ -1,6 +1,7 @@
 package cn.edu.neu.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.edu.neu.core.common.Page;
 import cn.edu.neu.model.Order;
@@ -16,4 +17,6 @@ public interface OrderMapper {
 	void delOrder(String orderId);
 	int getOrderStatusById(String orderId);
 	void changeOrderStatus(String orderId, int status);
+	List<Order> findMyOrders(String status);
+	List<Order> findMyListOrders(Page<Order> page);
 }

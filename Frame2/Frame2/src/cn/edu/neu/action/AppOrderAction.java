@@ -118,4 +118,13 @@ public class AppOrderAction extends BaseAction {
 		return m;
 		
 	}
+	@ResponseBody
+	@RequestMapping("/getMyListOrders")
+	public Map<String,List<Order>> getMyListOrders(@RequestParam (required = false)String status){
+		Map<String,List<Order>> m = new HashMap<>();
+		System.out.println("OrderAction:" + status);
+		List<Order>orders = orderService.getMyListOrders(this.getLoginUserId(), status);
+		m.put("orders", orders);		
+		return m;
+	}
 }

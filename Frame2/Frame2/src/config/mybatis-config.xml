@@ -25,6 +25,7 @@
 		<mapper resource="cn/edu/neu/mapper/goodsMapper.xml" />
 		<mapper resource="cn/edu/neu/mapper/addressMapper.xml" />
 		<mapper resource="cn/edu/neu/mapper/orderMapper.xml"/>
+		<mapper resource="cn/edu/neu/mapper/adverMapper.xml"/>
 	
 		
 	</mappers>

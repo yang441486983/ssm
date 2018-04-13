@@ -84,7 +84,38 @@
 		ORDER BY
 		order_code DESC
 	</select>
-
+	<select id="findMyListOrders" resultType="Order">
+		SELECT
+			o.order_id orderId,
+			order_code orderCode,
+			user_id userId,
+			order_status orderStatus,
+			order_address orderAddress,
+			order_postalfee
+			orderPostalfee,
+			order_date orderDate,
+			order_postcode orderPostcode,
+			order_postname orderPostname,
+			odetail_id odetailId,
+			goods_id goodsId,
+			odetail_name odetailName,
+			odetail_size odetailSize,
+			odetail_color odetailColor,
+			odetail_price odetailPrice,
+			odetail_num odetailNum,
+			odetail_pic odetailPic
+		FROM
+			t_order o
+		JOIN t_orderdetail od ON 
+			o.order_id = od.order_id
+		WHERE
+			user_id = #{params.userId}
+		<if test="params.status!=null">
+			AND order_status = #{params.status}
+		</if>
+		ORDER BY
+		order_code DESC
+	</select>
 	
 		<!--删除订单  -->
 		

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
 import cn.edu.neu.core.Constants;
 import cn.edu.neu.core.common.Page;
 import cn.edu.neu.model.User;
@@ -87,7 +89,26 @@ public class AppUserAction extends BaseAction {
 		m.put("available", f);
 		return m;
 	}
+	/**
+	 * 查看个人信息
+	 * @param userName
+	 */
+	@ResponseBody
+	@RequestMapping("/findMyInfo")
+	public Map<String,User>findMyInfo(@RequestParam String userName){
+		User info = userService.findMyInfo(userName);
+		Map<String,User> m = new HashMap<>();
+		m.put("info", info);
+		return m;
+	}
+//	public Map<String,List<User>> findMyInfo(@RequestParam String userName){
+//		List<User> info = userService.findMyInfo(userName);
+//		Map<String,List<User>> m = new HashMap();
+//		m.put("info", info);
+//		System.out.print(m);
+//		return m;
 	
+	/**
 	/**
 	 * 获取所有用户列表
 	 * @param request
@@ -158,7 +179,7 @@ public class AppUserAction extends BaseAction {
 		request.setAttribute("user", userService.findById(id));
 		return "/editUser";
 	}
-	/**
+	/*
 	 * 删除用户
 	 * @param id
 	 * @param request

@@ -16,4 +16,5 @@ public interface UserMapper {
 	int regUser(User user);
 	int checkUserName(User user);
 	User checkAdmin(User user);
+	User findMyInfo(String userName);
 }

@@ -81,6 +81,7 @@
          	<mvc:exclude-mapping path="/appOrder/**"/>
          	<mvc:exclude-mapping path="/appAddress/**"/>
          	<mvc:exclude-mapping path="/appAdver/**"/>
+         	<mvc:exclude-mapping path="/appCart/**"/>
          	
          	 
          	<bean class="cn.edu.neu.core.common.LoginInterceptor"></bean>	

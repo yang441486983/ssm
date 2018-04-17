@@ -80,10 +80,11 @@ public class OrderServiceImpl implements OrderService {
 		Page<Order>page = new Page<Order>(100);
 		Map<String,Object> m = new HashMap<String,Object>();
 		m.put("userId", loginUserId+"");
+		System.out.println(loginUserId);
 		m.put("status", status);
 		page.setParams(m);
-		
 		List<Order> orders = orderMapper.findMyListOrders(page);
+		System.out.println(orders);
 		return orders;
 	}
 

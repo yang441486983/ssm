@@ -124,7 +124,8 @@ public class AppOrderAction extends BaseAction {
 		Map<String,List<Order>> m = new HashMap<>();
 		System.out.println("OrderAction:" + status);
 		List<Order>orders = orderService.getMyListOrders(this.getLoginUserId(), status);
-		m.put("orders", orders);		
+		m.put("orders", orders);
+	
 		return m;
 	}
 }

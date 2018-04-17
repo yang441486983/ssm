@@ -84,7 +84,7 @@
 		ORDER BY
 		order_code DESC
 	</select>
-	<select id="findMyListOrders" resultType="Order">
+	<select id="findMyListOrders" resultMap="OrderResultMap">
 		SELECT
 			o.order_id orderId,
 			order_code orderCode,

@@ -11,10 +11,14 @@ public interface UserMapper {
 	boolean update(User user);
 	boolean delete(int id);
 	User findById(int id);
-	List<User> findAll(Page<User> p);
+	
+	//List<User> findAll(Page<User> p);
 	User checkUser(User user);
 	int regUser(User user);
 	int checkUserName(User user);
 	User checkAdmin(User user);
 	User findMyInfo(String userName);
+	List<User> findAll();
+	void addAdmin(User user);
+	
 }

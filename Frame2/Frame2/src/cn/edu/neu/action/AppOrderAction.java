@@ -1,6 +1,7 @@
 package cn.edu.neu.action;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,8 @@ import cn.edu.neu.model.Order;
 import cn.edu.neu.model.OrderDetail;
 import cn.edu.neu.service.AddressService;
 import cn.edu.neu.service.OrderService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 @SessionAttributes(types={String[].class})
@@ -62,6 +65,13 @@ public class AppOrderAction extends BaseAction {
 	public String addOrder(
 			@RequestParam String address,
 			@RequestParam String orderPostalfee,
+			@RequestParam String goodsId,
+			@RequestParam String goodsName,
+			@RequestParam String goodsDiscount,
+			@RequestParam String size,
+			@RequestParam String color,
+			@RequestParam String num,
+			@RequestParam String pic,
 			HttpSession session,
 			Map<String,Order> m
 			){
@@ -69,33 +79,53 @@ public class AppOrderAction extends BaseAction {
 		   order.setUserId(this.getLoginUserId());
 		   order.setOrderAddress(address);
 		   order.setOrderPostalfee(Float.parseFloat(orderPostalfee));
-		   
+		   String id1 = goodsId.replace("[", "");
+		   String id2 = id1.replace("]", "");
+		   String id3 = id2.replace("\"", "");
+		   String[] id4 = id3.split(",");
+		   String name1 = goodsName.replace("[", "");
+		   String name2 = name1.replace("]", "");
+		   String name3 = name2.replace("\"", "");
+		   String[] name4 = name3.split(",");
+		   String price1 = goodsDiscount.replace("[", "");
+		   String price2 = price1.replace("]", "");
+		   String price3 = price2.replace("\"", "");
+		   String[] price4 = price3.split(",");
+		   String size1 = size.replace("[", "");
+		   String size2 = size1.replace("]", "");
+		   String size3 = size2.replace("\"", "");
+		   String[] size4 = size3.split(",");
+		   String color1 = color.replace("[", "");
+		   String color2 = color1.replace("]", "");
+		   String color3 = color2.replace("\"", "");
+		   String[] color4 = color3.split(",");
+		   String num1 = num.replace("[", "");
+		   String num2 = num1.replace("]", "");
+		   String num3 = num2.replace("\"", "");
+		   String[] num4 = num3.split(",");
+		   String pic1 = pic.replace("[", "");
+		   String pic2 = pic1.replace("]", "");
+		   String pic3 = pic2.replace("\"", "");
+		   String[] pic4 = pic3.split(",");
 		   List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
-		   for(int i = 0;i<((String[])session.getAttribute("goodsId")).length;i++){
+		   for(int i = 0;i<id4.length;i++){
+			   System.out.println(id4[i]);
 			   OrderDetail orderDetail = new OrderDetail();
-			   orderDetail.setGoodsId(Integer.parseInt(((String[]) session
-					   .getAttribute("goodsId"))[i]));
+			   orderDetail.setGoodsId(Integer.parseInt(id4[i]));
 			   
-			   orderDetail.setOdetailName(((String[]) session
-					   .getAttribute("goodsName"))[i]);
+			   orderDetail.setOdetailName(name4[i]);
 			   
-			   orderDetail.setOdetailPrice(Float.parseFloat(((String[]) session
-					   .getAttribute("goodsDiscount"))[i]));
+			   orderDetail.setOdetailPrice(Float.parseFloat(price4[i]));
 			   
-			   orderDetail.setOdetailSize(((String[]) session
-					   .getAttribute("size"))[i]);
+			   orderDetail.setOdetailSize(size4[i]);
 			   
-			   orderDetail.setOdetailColor(((String[]) session
-					   .getAttribute("color"))[i]);
+			   orderDetail.setOdetailColor(color4[i]);
 			   
-			   orderDetail.setOdetailNum(Integer.parseInt(((String[]) session
-					   .getAttribute("num"))[i]));
+			   orderDetail.setOdetailNum(Integer.parseInt(num4[i]));
 			   
-			   orderDetail.setOdetailPic(((String[]) session
-					   .getAttribute("pic"))[i]);
+			   orderDetail.setOdetailPic(pic4[i]);
 			   
 			   orderDetails.add(orderDetail);
-			   System.out.println("orderAction输出："+orderDetails);
 		   }try{
 			   orderService.addOrder(order, orderDetails);
 			   Order orderInfo = orderService.getOrderDetailById(String.valueOf(order.getOrderId()));
@@ -105,8 +135,8 @@ public class AppOrderAction extends BaseAction {
 			   e.printStackTrace();
 			   this.addMessage("提交订单失败");
 			   this.addRedirURL("返回", "@back");
-			   return EXECUTE_RESULT;			   
-		   }		
+			   return EXECUTE_RESULT;
+		   }
 	}
 	@ResponseBody
 	@RequestMapping("/getMyOrders")

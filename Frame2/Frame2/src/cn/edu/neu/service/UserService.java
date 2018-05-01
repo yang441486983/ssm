@@ -1,6 +1,7 @@
 package cn.edu.neu.service;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
+import java.util.List;
 
 import cn.edu.neu.core.common.Page;
 
@@ -12,12 +13,15 @@ public interface UserService {
 	boolean update(User user);
 	boolean delete(int id);
 	User findById(int id);
-	Page<User> findAll();
+	
+	//Page<User> findAll();
 	User checkUser(User user);
 	boolean regUser(User user);
 	boolean checkUserName(String userName);
 	User checkAdmin(User user);
 	User findMyInfo(String userName);
+	List<User> findAll();
+	void addAdmin(User user);
 
 	
 }

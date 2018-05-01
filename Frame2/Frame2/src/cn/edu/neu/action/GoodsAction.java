@@ -29,6 +29,7 @@ public class GoodsAction extends BaseAction{
 	public String getNewGoods(Map<String,List<Goods>> m){
 		List<Goods> newGoods=goodsService.getNewGoods();
 		m.put("newGoods", newGoods);
+		System.out.println(m);
 		return "/goods/newGoods";
 	}
 	

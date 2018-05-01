@@ -114,14 +114,14 @@ public class AppUserAction extends BaseAction {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/getAllUsers")
-	public String getAllUsers(HttpServletRequest request){
-		
-		Page<User> findAll = userService.findAll();
-		
-		request.setAttribute("userList", findAll);
-		return "/allUser";
-	}
+//	@RequestMapping("/getAllUsers")
+//	public String getAllUsers(HttpServletRequest request){
+//		
+//		Page<User> findAll = userService.findAll();
+//		
+//		request.setAttribute("userList", findAll);
+//		return "/allUser";
+//	}
 	
 	/**
 	 * 跳转到添加用户界面

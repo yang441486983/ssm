@@ -27,22 +27,28 @@ public class UserServiceImpl implements UserService {
 		
 		return mapper.delete(id);
 	}
-
-	public Page<User> findAll() {
-		//开始分页
-		//PageHelper.startPage();
-		//紧跟着的第一个select方法会被分页
-		Page<User> page = new Page<User>(2);
-		Map<String, Object> m=new HashMap<String,Object>();
-		m.put("name","%a%");
-		m.put("age",10);
-		page.setParams(m);
-		List<User> findAllList = mapper.findAll(page);
-		//用Page对结果进行包装
-		 page.setList(findAllList);  
-		 System.out.println(page);
-		return page;
+	@Override
+	public List<User> findAll() {
+		// TODO Auto-generated method stub
+		List<User> findAllList = mapper.findAll();
+		
+		return findAllList;
 	}
+//	public Page<User> findAll() {
+//		//开始分页
+//		//PageHelper.startPage();
+//		//紧跟着的第一个select方法会被分页
+//		Page<User> page = new Page<User>(100);
+//		Map<String, Object> m=new HashMap<String,Object>();
+//		m.put("name","%a%");
+//		m.put("age",0);
+//		page.setParams(m);
+//		List<User> findAllList = mapper.findAll(page);
+//		//用Page对结果进行包装
+//		 page.setList(findAllList);  
+//		 System.out.println(page);
+//		return page;
+//	}
 
 	public User findById(int id) {
 
@@ -108,6 +114,13 @@ public class UserServiceImpl implements UserService {
 		User findMyInfo = mapper.findMyInfo(userName);
 		return findMyInfo;
 	}
+	@Override
+	public void addAdmin(User user) {
+		// TODO Auto-generated method stub
+		mapper.addAdmin(user);
+	}
+
+	
 
 	
 }

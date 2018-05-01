@@ -34,6 +34,7 @@
 	<mvc:view-controller path="/execute_result" view-name="/common/execute_result"/>
 	<mvc:view-controller path="/login" view-name="/common/login"/>
 	<mvc:view-controller path="/usercenter/index" view-name="/usercenter/index"/>
+
 	
 	
 	<!--

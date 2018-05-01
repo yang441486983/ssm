@@ -9,11 +9,13 @@
 <mapper namespace="cn.edu.neu.mapper.UserMapper">
 	
 	<insert id="save" parameterType="User">
-		insert into t_user(user_name,user_age,user_pass,user_sex) values(#{userName},#{age},#{password},#{sex})
+		insert into t_user(user_name,user_age,user_pass,user_sex) values(#{userName},#{userAge},#{passWord},#{userSex})
 	</insert>
-	
+	<insert id="addAdmin" parameterType="User">
+		insert into t_user(user_name,user_pass,user_age,user_sex,user_email,user_rank) values(#{userName},#{userPass},#{userAge},#{userSex},#{userEmail},#{userRank})
+	</insert>
 	<update id="update" parameterType="User">
-		update t_user set user_name=#{userName},user_age=#{age} where user_id=#{id}
+		update t_user set user_name=#{userName},user_age=#{userAge},user_sex=#{userSex},user_email=#{userEmail},user_rank=#{userRank} where user_id=#{userId}
 	</update>
 	
 	<delete id="delete" parameterType="int">
@@ -29,7 +31,7 @@
 	</select>
 	
 	<select id="findAll" resultType="User">
-		select user_id id,user_name userName,user_age userAge from t_user where user_name like #{params.name} and user_age>#{params.age}
+		select user_id userId,user_name userName,user_sex userSex,user_age userAge,user_email userEmail,user_rank userRank from t_user
 	</select>
 	
 	<select id="checkUser" parameterType="User" resultType="User">
@@ -50,6 +52,6 @@
 	</insert>
 	
 	<select id="checkAdmin" parameterType="User" resultType="User">
-		select user_id userId,user_name userName,user_age userAge from t_user where user_name=#{userName} and user_pass=#{userPass} and user_rank=1
+		select user_id userId,user_name userName,user_pass userPass from t_user where user_name=#{userName} and user_pass=#{userPass} and user_rank=1
 	</select>
 </mapper>

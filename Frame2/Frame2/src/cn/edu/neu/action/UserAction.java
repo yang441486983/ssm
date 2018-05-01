@@ -3,6 +3,7 @@ package cn.edu.neu.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,13 +77,20 @@ public class UserAction extends BaseAction{
 			m.put("reg", "no");
 		return m;
 	}
+	@RequestMapping("/addAdmin")
+	public String addAdmin(User user) throws Exception{
+		userService.addAdmin(user);
+		return "/manage/morris-chart";
+		
+	}
 	
 	/**
 	 * 检查用户是否重复
 	 */
 	@ResponseBody
 	@RequestMapping("/checkUserName")
-	public Map<String,Boolean> checkUserName(@RequestParam String userName) throws Exception {	
+	public Map<String,Boolean> checkUserName(@RequestParam String userName) throws Exception {
+		System.out.println(userName);
 		boolean f=userService.checkUserName(userName);
 		Map<String,Boolean> m=new HashMap<String,Boolean>();
 		m.put("available", f);
@@ -95,14 +103,20 @@ public class UserAction extends BaseAction{
 	 * @return
 	 */
 	@RequestMapping("/getAllUsers")
-	public String getAllUsers(HttpServletRequest request){
-		
-		Page<User> findAll = userService.findAll();
-		
-		request.setAttribute("userList", findAll);
-		return "/allUser";
+	public String getAllUsers(HttpServletRequest request,Map<String,List<User>> m){
+		List<User> findAll = (List<User>) userService.findAll();
+		m.put("userList", findAll);
+		request.setAttribute("userList", m);
+		System.out.println(m);
+//		Page<User> findAll = userService.findAll();
+//		
+//		request.setAttribute("userList", findAll);
+		return "/manage/chart";
 	}
-	
+	@RequestMapping("/toUpdate")
+	public String toUpdate(){
+		return "/manage/updateUserInfo";
+	}
 	/**
 	 * 跳转到添加用户界面
 	 * @param request
@@ -135,17 +149,27 @@ public class UserAction extends BaseAction{
 	 * @param request
 	 * @return
 	 */
+	@RequestMapping("/add")
+	public String add(){
+		
+		return "/manage/morris-chart";
+	}
+	@RequestMapping("/update")
+	public String update(){
+		return "/manage/updateUserInfo";
+	}
 	@RequestMapping("/updateUser")
 	public String updateUser(User user,HttpServletRequest request){
+		userService.update(user);
+		return "redirect:/user/getAllUsers";
 		
-		
-		if(userService.update(user)){
-			user = userService.findById(user.getUserId());
-			request.setAttribute("user", user);
-			return "redirect:/user/getAllUser";
-		}else{
-			return "/error";
-		}
+//		if(userService.update(user)){
+//			user = userService.findById(user.getUserId());
+//			request.setAttribute("user", user);
+//			return "redirect:/manage/chart";
+//		}else{
+//			return "/error";
+//		}
 	}
 	/**
 	 * 根据id查询单个用户
@@ -167,6 +191,7 @@ public class UserAction extends BaseAction{
 	 */
 	@RequestMapping("/delUser")
 	public void delUser(int id,HttpServletRequest request,HttpServletResponse response){
+		System.out.println("此方法已被调用");
 		String result = "{\"result\":\"error\"}";
 		
 		if(userService.delete(id)){
@@ -196,7 +221,8 @@ public class UserAction extends BaseAction{
 		Map<String,String> m=new HashMap<String,String>();
 		if(dbUser!=null){		
 			session.setAttribute(Constants.LOGIN_USER, dbUser);
-			m.put("login", "yes");	
+			m.put("login", "yes");
+			
 		}
 		else{
 			//this.addMessage(Constants.LOGIN_ERR);

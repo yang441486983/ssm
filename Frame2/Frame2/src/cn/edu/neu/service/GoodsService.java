@@ -26,6 +26,14 @@ public interface GoodsService {
 
 	Goods getGoodsSizesById(String goodsId);
 
+	List<Goods> getAllGoods();
+
+	void delGoods(String goodsId);
+
+	void updateGoodsInformation(Goods goods);
+
+	void addGoods(Goods goods);
+
 	
 
 

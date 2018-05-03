@@ -19,7 +19,7 @@ public class Goods {
 	private int goodsStock;
 	private String goodsOrigin;
 	private String goodsMaterial;
-	private int goodsPostalfee;
+	private float goodsPostalfee;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date goodsDate;
 	private int goodsSales;
@@ -122,10 +122,10 @@ public class Goods {
 	public void setGoodsMaterial(String goodsMaterial) {
 		this.goodsMaterial = goodsMaterial;
 	}
-	public int getGoodsPostalfee() {
+	public float getGoodsPostalfee() {
 		return goodsPostalfee;
 	}
-	public void setGoodsPostalfee(int goodsPostalfee) {
+	public void setGoodsPostalfee(float goodsPostalfee) {
 		this.goodsPostalfee = goodsPostalfee;
 	}
 	public Date getGoodsDate() {

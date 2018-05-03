@@ -30,6 +30,36 @@
 		where
 			g.goods_id = #{goodsId}
 	</select>
+	<select id="findAllGoods" resultType="Goods">
+		select
+			goods_id goodsId,
+			cate_id cateId,
+			goods_name goodsName,
+			goods_disc goodsDisc,
+			goods_price goodsPrice,
+			goods_discount goodsDiscount,
+			goods_stock goodsStock,
+			goods_origin goodsOrigin,
+			goods_material goodsMaterial,
+			goods_postalfee goodsPostalfee,
+			goods_date goodsDate,
+			goods_sales goodsSales,
+			goods_pic goodsPic
+		from
+			t_goods
+	</select>
+	<delete id="delGoods">
+		delete from t_goods where goods_id=#{goodsId}
+	</delete>
+	<update id="updateGoodsInformation" parameterType="Goods">
+		update t_goods set cate_id=#{cateId},goods_name=#{goodsName},goods_disc=#{goodsDisc},goods_price=#{goodsPrice},
+			goods_discount=#{goodsDiscount},goods_stock=#{goodsStock},goods_origin=#{goodsOrigin},goods_material=#{goodsMaterial},
+			goods_pic=#{goodsPic} where goods_id=#{goodsId}
+	</update>
+	<insert id="addGoods" parameterType="Goods">
+		insert into t_goods(cate_id,goods_name,goods_disc,goods_price,goods_discount,goods_stock,goods_origin,goods_material,goods_postalfee,goods_date,goods_sales,goods_pic)
+		values(#{cateId},#{goodsName},#{goodsDisc},#{goodsPrice},#{goodsDiscount},#{goodsStock},#{goodsOrigin},#{goodsMaterial},#{goodsPostalfee},#{goodsDate},#{goodsSales},#{goodsPic})
+	</insert>
 	<select id="findGoodsSizesById" parameterType="int" resultMap="GoodsResultMap">
 		select
 			g.goods_id goodsId,

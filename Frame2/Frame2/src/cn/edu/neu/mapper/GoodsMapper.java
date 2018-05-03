@@ -25,6 +25,14 @@ public interface GoodsMapper {
 
 	Goods findGoodsColorsById(String goodsId);
 
+	List<Goods> findAllGoods();
+
+	void delGoods(String goodsId);
+
+	void updateGoodsInformation(Goods goods);
+
+	void addGoods(Goods goods);
+
 	
 
 	

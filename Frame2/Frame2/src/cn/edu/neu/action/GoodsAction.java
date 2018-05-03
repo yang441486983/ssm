@@ -1,6 +1,9 @@
 package cn.edu.neu.action;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -71,6 +74,83 @@ public class GoodsAction extends BaseAction{
 		return "goods/goodsDetail";
 		
 	}
-	
+	@RequestMapping("/manageGoods")
+	public String manageGoods(HttpServletRequest request,Map<String,List<Goods>> m ){
+		List<Goods> goods = goodsService.getAllGoods();
+		m.put("goodsList", goods);
+		request.setAttribute("goodsList", m);
+		System.out.println(m);
+		return "manage/showManageGoods";
+	}
+	@RequestMapping("/delGoods")
+	public String manageGoods(@RequestParam String goodsId){
+		System.out.println(goodsId);
+		goodsService.delGoods(goodsId);
+		return "redirect:/goods/manageGoods";
+	}
+	@RequestMapping("/updateGoodsInformation")
+	public String updateGoodsInformation(int goodsId
+			,int cateId,String goodsName,String goodsDisc,float goodsPrice,
+			float goodsDiscount,int goodsStock,String goodsOrigin
+			,String goodsMaterial
+			,float goodsPostalfee
+			,Date goodsDate
+			,int goodsSales
+			,String goodsPic
+			,HttpServletRequest request){
+			System.out.println("测试"+goodsId);
+			Goods goods = new Goods();
+			goods.setGoodsId(goodsId);
+			goods.setCateId(cateId);
+			goods.setGoodsName(goodsName);
+			goods.setGoodsDisc(goodsDisc);
+			goods.setGoodsPrice(goodsPrice);
+			goods.setGoodsDiscount(goodsDiscount);
+			goods.setGoodsStock(goodsStock);
+			goods.setGoodsOrigin(goodsOrigin);
+			goods.setGoodsMaterial(goodsMaterial);
+			goods.setGoodsPostalfee(goodsPostalfee);
+			goods.setGoodsDate(goodsDate);
+			System.out.println(goodsDate);
+			goods.setGoodsSales(goodsSales);
+			//System.out.println(goodsSales);
+			goods.setGoodsPic(goodsPic);
+//			System.out.println(goods);
+			goodsService.updateGoodsInformation(goods);
+		
+		return "redirect:/goods/manageGoods";
+		
+	}
+	@RequestMapping("/toAddGoods")
+	public String toAddGoods(){
+		return "manage/addGoods";
+	}
+	@RequestMapping("/addGoods")
+	public String addGoods(int cateId,String goodsName,String goodsDisc,float goodsPrice,
+			float goodsDiscount,int goodsStock,String goodsOrigin
+			,String goodsMaterial
+			,float goodsPostalfee
+			,int goodsSales
+			,String goodsPic
+			,HttpServletRequest request){
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Goods goods = new Goods();
+		goods.setCateId(cateId);
+		goods.setGoodsName(goodsName);
+		goods.setGoodsDisc(goodsDisc);
+		goods.setGoodsPrice(goodsPrice);
+		goods.setGoodsDiscount(goodsDiscount);
+		goods.setGoodsStock(goodsStock);
+		goods.setGoodsOrigin(goodsOrigin);
+		goods.setGoodsMaterial(goodsMaterial);
+		goods.setGoodsPostalfee(goodsPostalfee);
+		goods.setGoodsDate(date);
+		goods.setGoodsSales(goodsSales);
+		goods.setGoodsPic(goodsPic);
+		goodsService.addGoods(goods);
+		
+		return "redirect:/goods/manageGoods";
+	}
 }				
 

@@ -87,6 +87,31 @@ public class GoodsServiceImpl implements GoodsService{
 		Goods goodsColors = mapper.findGoodsColorsById(goodsId);
 		return goodsColors;
 	}
+
+	@Override
+	public List<Goods> getAllGoods() {
+		List<Goods> goods = mapper.findAllGoods();
+		// TODO Auto-generated method stub
+		return goods;
+	}
+
+	@Override
+	public void delGoods(String goodsId) {
+		// TODO Auto-generated method stub
+		mapper.delGoods(goodsId);
+	}
+
+	@Override
+	public void updateGoodsInformation(Goods goods) {
+		// TODO Auto-generated method stub
+		mapper.updateGoodsInformation(goods);
+	}
+
+	@Override
+	public void addGoods(Goods goods) {
+		// TODO Auto-generated method stub
+		mapper.addGoods(goods);
+	}
 	
 
 	

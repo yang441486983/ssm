@@ -21,6 +21,10 @@ public interface OrderService {
 
 	List<Order> getMyListOrders(int loginUserId, String status);
 
+	List<Order> getAllOrders();
+
+	void updateOrder(Order order);
+
 
 
 }

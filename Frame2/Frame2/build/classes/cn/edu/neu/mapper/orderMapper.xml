@@ -17,7 +17,9 @@
 		(NULL,#{orderCode},#{userId},0,#{orderAddress},#{orderPostalfee},
 		curdate(),'','')
 	</insert>
-	
+	<update id="updateOrder" parameterType="Order">
+		update t_order set order_status=#{orderStatus},order_address=#{orderAddress},order_postcode=#{orderPostcode},order_postname=#{orderPostname} where order_id=#{orderId}
+	</update>
 	<insert id="saveOrderDetail" parameterType="Order">
 		INSERT INTO t_orderdetail
 		VALUES
@@ -50,7 +52,12 @@
 			order by
 				odetail_id
 	</select>
-	
+	<select id="findAllOrders" resultType="Order">
+		select order_id orderId,order_code orderCode,user_id userId,order_status orderStatus,
+		order_address orderAddress,order_postalfee orderPostalfee,
+		order_date orderDate,order_postcode orderPostcode,order_postname orderPostname
+		from t_order
+	</select>
 	<!-- 查询所有订单 -->
 	<select id="findMyOrders" resultMap="OrderResultMap">
 		SELECT

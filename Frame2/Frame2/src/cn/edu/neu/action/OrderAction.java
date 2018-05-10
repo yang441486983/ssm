@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import cn.edu.neu.service.AddressService;
 import cn.edu.neu.service.OrderService;
 
 @Controller
-@SessionAttributes(types={String[].class})
+//@SessionAttributes(types={String[].class})
 @RequestMapping("/order")
 public class OrderAction extends BaseAction {
 
@@ -127,7 +128,31 @@ public class OrderAction extends BaseAction {
 		return "/order/orderList";
 		
 	}
-	
+	@RequestMapping("/showAllOrders")
+	public String getAllOrders(HttpServletRequest request,HttpSession session,Map<String,List<Order>> m ){
+		System.out.println("执行了showAllOrders");
+		List<Order> orders = orderService.getAllOrders();
+		m.put("orderList", orders);
+		request.setAttribute("goodsList", m);
+		System.out.println(m);
+		return "/manage/allOrdersShow";
+	}
+	@RequestMapping("/adminDelOrder")
+	public String adminDelOrder(@RequestParam String orderId){
+		orderService.delOrder(orderId);
+		return "redirect:/order/showAllOrders";
+	}
+	@RequestMapping("/updateOrder")
+	public String updateOrder(int orderId,int orderStatus,String orderAddress,String orderPostcode,String orderPostname){
+		Order order = new Order();
+		order.setOrderId(orderId);
+		order.setOrderStatus(orderStatus);
+		order.setOrderAddress(orderAddress);
+		order.setOrderPostcode(orderPostcode);
+		order.setOrderPostname(orderPostname);
+		orderService.updateOrder(order);
+		return "redirect:/order/showAllOrders";
+	}
 	@RequestMapping("/delOrder")
 	public String delOrder(@RequestParam String orderId){
 		try{

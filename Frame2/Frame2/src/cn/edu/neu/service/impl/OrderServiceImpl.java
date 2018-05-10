@@ -117,6 +117,22 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 
+	@Override
+	public List<Order> getAllOrders() {
+		// TODO Auto-generated method stub
+		List<Order> orders = orderMapper.findAllOrders();
+		return orders;
+	}
+
+
+	@Override
+	public void updateOrder(Order order) {
+		// TODO Auto-generated method stub
+		orderMapper.updateOrder(order);
+		
+	}
+
+
 
 
 	

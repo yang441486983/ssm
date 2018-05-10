@@ -19,4 +19,6 @@ public interface OrderMapper {
 	void changeOrderStatus(String orderId, int status);
 	List<Order> findMyOrders(String status);
 	List<Order> findMyListOrders(Page<Order> page);
+	List<Order> findAllOrders();
+	void updateOrder(Order order);
 }

@@ -21,4 +21,5 @@ public interface OrderMapper {
 	List<Order> findMyListOrders(Page<Order> page);
 	List<Order> findAllOrders();
 	void updateOrder(Order order);
+	void changeToAlreadyPaid(String orderId);
 }

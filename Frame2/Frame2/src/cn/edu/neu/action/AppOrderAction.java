@@ -127,10 +127,11 @@ public class AppOrderAction extends BaseAction {
 			   
 			   orderDetails.add(orderDetail);
 		   }try{
-			   orderService.addOrder(order, orderDetails);
+			   int orderId = orderService.addOrder(order, orderDetails);
 			   Order orderInfo = orderService.getOrderDetailById(String.valueOf(order.getOrderId()));
 			   m.put("orderDetail", orderInfo);
-			   return "提交成功";
+			   System.out.println(orderId);
+			   return String.valueOf(orderId);
 		   }catch(Exception e){
 			   e.printStackTrace();
 			   this.addMessage("提交订单失败");
@@ -157,5 +158,10 @@ public class AppOrderAction extends BaseAction {
 		m.put("orders", orders);
 	
 		return m;
+	}
+	@ResponseBody
+	@RequestMapping("/changeToAlreadyPaid")
+	public void changeToAlreadyPaid(@RequestParam (required = false)String orderId){
+		orderService.changeToAlreadyPaid(orderId);
 	}
 }

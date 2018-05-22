@@ -133,6 +133,13 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 
+	@Override
+	public void changeToAlreadyPaid(String orderId) {
+		// TODO Auto-generated method stub
+		orderMapper.changeToAlreadyPaid(orderId);
+	}
+
+
 
 
 	

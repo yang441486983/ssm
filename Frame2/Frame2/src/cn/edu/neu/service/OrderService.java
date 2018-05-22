@@ -25,6 +25,8 @@ public interface OrderService {
 
 	void updateOrder(Order order);
 
+	void changeToAlreadyPaid(String orderId);
+
 
 
 }
